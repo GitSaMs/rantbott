@@ -22,12 +22,13 @@ namespace Twitchbot
         DateTime lastMessage;
         StreamWriter writer;
         string username, password,channelname,trimchat;
+        
 
         public Form1()
         {
             sendMessageQueue = new Queue<string>();
             this.username = "rantbott";
-            this.channelname = "ropzelcius";
+            this.channelname = "rantsi92";
             this.password = File.ReadAllText("password.txt");
             this.trimchat = $":{username}!{username}@{username}.tmi.twitch.tv PRIVMSG #{channelname} :";
             InitializeComponent();
@@ -50,7 +51,6 @@ namespace Twitchbot
             writer.Flush();
             textBox1.Text += Environment.NewLine + "Connected";
             SendMessage("RantBot Connected, Chat is gonna be deleted now #RANTSI");
-
 
         }
         private void timer1_Tick_1(object sender, EventArgs e)
@@ -85,9 +85,17 @@ namespace Twitchbot
             {
                 SendMessage($"Hello, {nick}");
             }
+            if (message.StartsWith("!vihhuu"))
+            {
+                SendMessage($"https://i.ytimg.com/vi/uyvfKK2zhgk/hqdefault.jpg , ");
+            }
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
 
         void TryReceiveMessages()
         {

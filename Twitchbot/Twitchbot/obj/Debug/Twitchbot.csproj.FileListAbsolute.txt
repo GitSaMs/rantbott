@@ -7,3 +7,12 @@ C:\Users\ropze\Desktop\Twitchbot\Twitchbot\bin\Debug\Twitchbot.pdb
 C:\Users\ropze\Desktop\Twitchbot\Twitchbot\obj\Debug\Twitchbot.exe
 C:\Users\ropze\Desktop\Twitchbot\Twitchbot\obj\Debug\Twitchbot.pdb
 C:\Users\ropze\Desktop\Twitchbot\Twitchbot\obj\Debug\Twitchbot.csprojResolveAssemblyReference.cache
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\bin\Debug\Twitchbot.exe.config
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.exe
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.pdb
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\bin\Debug\Twitchbot.exe
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\bin\Debug\Twitchbot.pdb
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.csprojResolveAssemblyReference.cache
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.Form1.resources
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.Properties.Resources.resources
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.csproj.GenerateResource.Cache
