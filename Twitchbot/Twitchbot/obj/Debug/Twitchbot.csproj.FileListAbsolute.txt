@@ -16,3 +16,5 @@ C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.csprojRe
 C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.Form1.resources
 C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.Properties.Resources.resources
 C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.csproj.GenerateResource.Cache
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.Form2.resources
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.Form3.resources

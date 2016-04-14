@@ -21,6 +21,7 @@ namespace Twitchbot
         StreamReader reader;
         DateTime lastMessage;
         StreamWriter writer;
+        List<Command> list = new List<Command>();
         string username, password,channelname,trimchat;
         
 
@@ -28,7 +29,7 @@ namespace Twitchbot
         {
             sendMessageQueue = new Queue<string>();
             this.username = "rantbott";
-            this.channelname = "rantsi92";
+            this.channelname = "ropzelcius";
             this.password = File.ReadAllText("password.txt");
             this.trimchat = $":{username}!{username}@{username}.tmi.twitch.tv PRIVMSG #{channelname} :";
             InitializeComponent();
@@ -89,12 +90,47 @@ namespace Twitchbot
             {
                 SendMessage($"https://i.ytimg.com/vi/uyvfKK2zhgk/hqdefault.jpg , ");
             }
+            if (message.StartsWith("!mysteeri"))
+            {
+                SendMessage($"Hei rantsi, mita niille laseille tapahtukaan?");
+            }
+            if (message.StartsWith("!lasit"))
+            {
+                SendMessage($"Oliko ne ne giorgio armaanit?");
+            }
+            if (message.StartsWith("!lasit2"))
+            {
+                SendMessage($"Eiku neha tippuki sinne hirvijarveen, mutta mitka ne armeijalasit sitte olikaan?");
+            }
+            if (message.StartsWith("!"))
+            {
+                Command comm = new Command();
+                string[] split1 = message.Split(' ');
+                string command = split1[0];
+                StreamReader sr = new StreamReader("commands.txt");
+                string line = sr.ReadLine();
+                string[] split2 = line.Split(':');
+
+                split2[0] = comm.Com;
+                split2[1] = comm.Answer;
+
+                if (command==comm.Com)
+                {
+                    SendMessage(comm.Answer);
+                }
+            }
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.ShowDialog();
         }
 
         void TryReceiveMessages()
@@ -112,7 +148,7 @@ namespace Twitchbot
                 ex = data.Split(new char[] { ' ' }, 5);
                 if (ex[0] == "PING")
                 {
-                    SendMessage("PONG " + ex[1]);
+                    SendMessage("PONG");
                 }
 
                 if (data.Contains("PRIVMSG"))
@@ -122,7 +158,7 @@ namespace Twitchbot
                         string[] split2 = split1[1].Split(' ');
                         nick = split2[0];
                         nick = nick.Split('!')[0];
-                        type = split2[1]; //Miksi tämä kaatuu tässä???????????????????????????
+                        type = split2[1]; 
                         channel = split2[2];
                         if (split1.Length > 2)
                         {
