@@ -108,15 +108,25 @@ namespace Twitchbot
                 string[] split1 = message.Split(' ');
                 string command = split1[0];
                 StreamReader sr = new StreamReader("commands.txt");
-                string line = sr.ReadLine();
-                string[] split2 = line.Split(':');
-
-                split2[0] = comm.Com;
-                split2[1] = comm.Answer;
-
-                if (command==comm.Com)
+                string line;
+                string[] split2;
+                while (sr.ReadLine()!=null)
                 {
-                    SendMessage(comm.Answer);
+                    line = sr.ReadLine();
+                    if (line !=null)
+                    {
+                        
+                        split2 = line.Split(';');
+
+                        split2[0] = comm.Com;
+                        split2[1] = comm.Answer;
+                    }
+
+                    if (command == comm.Com)
+                    {
+                        SendMessage(comm.Answer);
+                        break;
+                    } 
                 }
             }
 

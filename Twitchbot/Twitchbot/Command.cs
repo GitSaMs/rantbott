@@ -16,7 +16,7 @@ namespace Twitchbot
         }
         public override string ToString()
         {
-            string s = Com + ":" + Answer;
+            string s = Com + ";" + Answer;
             return s;
         }
     }
