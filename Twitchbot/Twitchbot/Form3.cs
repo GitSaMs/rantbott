@@ -24,7 +24,7 @@ namespace Twitchbot
             x.Com = textBox1.Text;
             x.Answer = textBox2.Text;
             string s =x.ToString();
-            StreamWriter sw = new StreamWriter("commands.txt");
+            StreamWriter sw = new StreamWriter("commands.txt",true);
             sw.WriteLine(s);
             sw.Close();
             Close();
