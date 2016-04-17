@@ -141,7 +141,7 @@ namespace Twitchbot
                     {
                         split2 = line.Split(';');
                         comm.Com = split2[0];
-                        commands = commands + comm.Com + "----------------------";
+                        commands = commands + comm.Com + " ";
 
                     }
                     if (line == null)
