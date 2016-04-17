@@ -23,6 +23,7 @@ namespace Twitchbot
         StreamWriter writer;
         List<Command> list = new List<Command>();
         string username, password,channelname,trimchat;
+        DateTime start = new DateTime();
         
 
         public Form1()
@@ -52,6 +53,7 @@ namespace Twitchbot
             writer.Flush();
             textBox1.Text += Environment.NewLine + "Connected";
             SendMessage("RantBot Connected, Chat is gonna be deleted now #RANTSI");
+            start = DateTime.Now;
 
         }
         private void timer1_Tick_1(object sender, EventArgs e)
@@ -86,21 +88,13 @@ namespace Twitchbot
             {
                 SendMessage($"Hello, {nick}");
             }
-            if (message.StartsWith("!vihhuu"))
+            if (message.StartsWith("!uptime"))
             {
-                SendMessage($"https://i.ytimg.com/vi/uyvfKK2zhgk/hqdefault.jpg , ");
-            }
-            if (message.StartsWith("!mysteeri"))
-            {
-                SendMessage($"Hei rantsi, mita niille laseille tapahtukaan?");
-            }
-            if (message.StartsWith("!lasit"))
-            {
-                SendMessage($"Oliko ne ne giorgio armaanit?");
-            }
-            if (message.StartsWith("!lasit2"))
-            {
-                SendMessage($"Eiku neha tippuki sinne hirvijarveen, mutta mitka ne armeijalasit sitte olikaan?");
+                DateTime whenasked = DateTime.Now;
+                var uptime = start - whenasked;
+                SendMessage($"Stream uptime: {uptime:hh\\:mm\\:ss}");
+
+
             }
             if (message.StartsWith("!"))
             {
@@ -131,6 +125,33 @@ namespace Twitchbot
                     }
                 }
                 sr.Close();
+            }
+            if (message.StartsWith("!commands"))
+            {
+                Command comm = new Command();
+                StreamReader sr = new StreamReader("commands.txt");
+                string line;
+                string[] split2;
+                string commands = "";
+                while (true)
+                {
+                    
+                    line = sr.ReadLine();
+                    if (line != null && line.StartsWith("!"))
+                    {
+                        split2 = line.Split(';');
+                        comm.Com = split2[0];
+                        commands = commands + comm.Com + "----------------------";
+
+                    }
+                    if (line == null)
+                    {
+                        break;
+                    }
+                }
+                SendMessage(commands);
+                sr.Close();
+
             }
 
         }
