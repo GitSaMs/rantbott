@@ -16,7 +16,7 @@ namespace Twitchbot
 {
     public partial class Form1 : Form
     {
-
+        int durations = 0;
         bool requests = false;
         Queue<string> songrequests = new Queue<string>();
         Queue<string> sendMessageQueue;
@@ -74,7 +74,7 @@ namespace Twitchbot
             
             TryReceiveMessages();
             TrySendingMessages();
-            
+            SongCheck();
 
         }
         public void SendMessage(string message)
@@ -323,16 +323,20 @@ namespace Twitchbot
             split = duration.Split(':');
             string[] split2;
             split2 = split[1].Split('"');
-            int durations = int.Parse(split2[1]);
-            if (timer==durations)
+            durations = int.Parse(split2[1]);
+            
+            
+
+        }
+        void SongCheck()
+        {
+            if (timer == durations)
             {
                 timer2.Stop();
                 timer = 0;
                 durations = 0;
                 NextSong();
             }
-            
-
         }
 
         
