@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -15,15 +16,20 @@ namespace Twitchbot
 {
     public partial class Form1 : Form
     {
+
+        bool requests = false;
+        Queue<string> songrequests = new Queue<string>();
         Queue<string> sendMessageQueue;
         TcpClient Client;
         NetworkStream netstream;
         StreamReader reader;
         DateTime lastMessage;
+        int timer = 0;
         StreamWriter writer;
         List<Command> list = new List<Command>();
         string username, password,channelname,trimchat;
         DateTime start = new DateTime();
+        
         
 
         public Form1()
@@ -64,8 +70,10 @@ namespace Twitchbot
                 Login();
             }
             
-                TryReceiveMessages();
-                TrySendingMessages();
+                
+            
+            TryReceiveMessages();
+            TrySendingMessages();
             
 
         }
@@ -93,9 +101,32 @@ namespace Twitchbot
                 DateTime whenasked = DateTime.Now;
                 var uptime = start - whenasked;
                 SendMessage($"Stream uptime: {uptime:hh\\:mm\\:ss}");
+            }
 
+            if (requests==true && message.StartsWith("!songrequest"))
+            {
+
+                string[] spliturl = message.Split(' ');
+
+                string mainurl = spliturl[1];
+                
+
+                
+                songrequests.Enqueue(mainurl);
+                if (axShockwaveFlash1.Movie==null)
+                {
+                    NextSong();
+                    Song(mainurl, timer);
+                }
+                else
+                {
+                    Song(mainurl, timer);
+
+                }
+                
 
             }
+
             if (message.StartsWith("!"))
             {
                 Command comm = new Command();
@@ -126,6 +157,7 @@ namespace Twitchbot
                 }
                 sr.Close();
             }
+            
             if (message.StartsWith("!commands"))
             {
                 Command comm = new Command();
@@ -155,6 +187,7 @@ namespace Twitchbot
             }
 
         }
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -208,6 +241,18 @@ namespace Twitchbot
                 ReceiveMessage(nick, message, channel, type,trimchat);
             }
         }
+
+        private void axShockwaveFlash1_OnReadyStateChange(object sender, AxShockwaveFlashObjects._IShockwaveFlashEvents_OnReadyStateChangeEvent e)
+        {
+            
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            timer++;
+
+        }
+
         void TrySendingMessages()
         {
             if(DateTime.Now-lastMessage>TimeSpan.FromSeconds(2))
@@ -224,10 +269,70 @@ namespace Twitchbot
             
 
         }
-        
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            if (requests==false)
+            {
+                requests = true;
+                button4.BackColor = Color.Green;
+            }
+            else
+            {
+                requests = false;
+                button4.BackColor = Color.Red;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button4.BackColor = Color.Red;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             SendMessage(textBox2.Text);
+            textBox2.Clear();
+        }
+        void NextSong()
+        {        
+            if (songrequests.Count > 0)
+            {
+                string mainurl = songrequests.Dequeue();
+                string url = mainurl.Replace("watch?", "");
+                url = url.Replace("=", "/");
+                url = "https://www.youtube.com/" + url + "&autoplay=1";
+
+                axShockwaveFlash1.Movie = url;
+                Song(mainurl, timer);
+
+            }
+        }
+        void Song(string url,int timer)
+        {
+            timer2.Start();
+            string fullurl = "https://www.youtube.com/" + url;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(fullurl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader sr = new StreamReader(response.GetResponseStream());
+            string data = sr.ReadToEnd();
+            int index = data.IndexOf("length_seconds");
+            string duration = data.Substring(index, 24);
+            string[] split;
+            split = duration.Split(':');
+            string[] split2;
+            split2 = split[1].Split('"');
+            int durations = int.Parse(split2[1]);
+            if (timer==durations)
+            {
+                timer2.Stop();
+                timer = 0;
+                durations = 0;
+                NextSong();
+            }
+            
+
         }
 
         
