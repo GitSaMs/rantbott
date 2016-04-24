@@ -64,3 +64,8 @@ C:\Users\ropze\Desktop\testimuokkaukset\testimuokkaukset\rantbott\Twitchbot\Twit
 C:\Users\ropze\Desktop\testimuokkaukset\testimuokkaukset\rantbott\Twitchbot\Twitchbot\bin\Debug\Twitchbot.pdb
 C:\Users\ropze\Desktop\testimuokkaukset\testimuokkaukset\rantbott\Twitchbot\Twitchbot\bin\Debug\Interop.ShockwaveFlashObjects.dll
 C:\Users\ropze\Desktop\testimuokkaukset\testimuokkaukset\rantbott\Twitchbot\Twitchbot\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Interop.ShockwaveFlashObjects.dll
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\AxInterop.ShockwaveFlashObjects.dll
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\obj\Debug\Twitchbot.csproj.ResolveComReference.cache
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\bin\Debug\Interop.ShockwaveFlashObjects.dll
+C:\Users\ropze\Desktop\rantbott\Twitchbot\Twitchbot\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
