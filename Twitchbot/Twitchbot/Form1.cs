@@ -213,10 +213,10 @@ namespace Twitchbot
                 string[] split1 = data.Split(':');
                 string[] ex;
                 ex = data.Split(new char[] { ' ' }, 5);
-                if (ex[0] == "PING")
+               /* if (ex[0] == "PING")
                 {
                     SendMessage("PONG");
-                }
+                }*/
 
                 if (data.Contains("PRIVMSG"))
                 {
@@ -277,11 +277,13 @@ namespace Twitchbot
             {
                 requests = true;
                 button4.BackColor = Color.Green;
+                SendMessage("Songrequests are on! Type !songrequest <end of the youtube link>");
             }
             else
             {
                 requests = false;
                 button4.BackColor = Color.Red;
+                SendMessage("Songrequests are off");
             }
         }
 
@@ -311,19 +313,32 @@ namespace Twitchbot
         }
         void Song(string url,int timer)
         {
-            timer2.Start();
-            string fullurl = "https://www.youtube.com/" + url;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(fullurl);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader sr = new StreamReader(response.GetResponseStream());
-            string data = sr.ReadToEnd();
-            int index = data.IndexOf("length_seconds");
-            string duration = data.Substring(index, 24);
-            string[] split;
-            split = duration.Split(':');
-            string[] split2;
-            split2 = split[1].Split('"');
-            durations = int.Parse(split2[1]);
+            try
+            {
+                timer2.Start();
+                string fullurl = "https://www.youtube.com/" + url;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(fullurl);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                StreamReader sr = new StreamReader(response.GetResponseStream());
+                string data = sr.ReadToEnd();
+                int index = data.IndexOf("length_seconds");
+                string duration = data.Substring(index, 24);
+                string[] split;
+                split = duration.Split(':');
+                string[] split2;
+                split2 = split[1].Split('"');
+                durations = int.Parse(split2[1]);
+            }
+            catch (Exception)
+            {
+                SendMessage("Invalid link DansGame");
+                if (songrequests.Count>0)
+                {
+                    songrequests.Reverse();
+                    songrequests.Dequeue();
+                    songrequests.Reverse();
+                }
+            }
             
             
 
