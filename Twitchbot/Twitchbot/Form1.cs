@@ -18,7 +18,7 @@ namespace Twitchbot
     {
         int durations = 0;
         bool requests = false;
-        Queue<string> songrequests = new Queue<string>();
+        List<string> songrequests = new List<string>();
         Queue<string> sendMessageQueue;
         TcpClient Client;
         NetworkStream netstream;
@@ -79,8 +79,7 @@ namespace Twitchbot
         }
         public void SendMessage(string message)
         {
-            sendMessageQueue.Enqueue(message);
-            
+            sendMessageQueue.Enqueue(message);  
         }
 
 
@@ -112,11 +111,12 @@ namespace Twitchbot
                 
 
                 
-                songrequests.Enqueue(mainurl);
+                songrequests.Add(mainurl);
                 if (axShockwaveFlash1.Movie==null)
                 {
-                    NextSong();
                     Song(mainurl, timer);
+                    NextSong();
+                    
                 }
                 else
                 {
@@ -301,7 +301,8 @@ namespace Twitchbot
         {        
             if (songrequests.Count > 0)
             {
-                string mainurl = songrequests.Dequeue();
+                string mainurl = songrequests[0];
+                songrequests.RemoveAt(0);
                 string url = mainurl.Replace("watch?", "");
                 url = url.Replace("=", "/");
                 url = "https://www.youtube.com/" + url + "&autoplay=1";
@@ -334,9 +335,9 @@ namespace Twitchbot
                 SendMessage("Invalid link DansGame");
                 if (songrequests.Count>0)
                 {
-                    songrequests.Reverse();
-                    songrequests.Dequeue();
-                    songrequests.Reverse();
+                    int count = songrequests.Count();
+                    songrequests.RemoveAt(count - 1);
+
                 }
             }
             
